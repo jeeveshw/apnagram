@@ -6,10 +6,13 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form"
 import { SignupValidation } from "@/lib/validation"
-
+import Loader from "@/components/shared/Loader"
 
  
 const SignUpForm = () => {
+    const isLoading = false;
+
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
@@ -36,8 +39,21 @@ const SignUpForm = () => {
         <img src="/assets/images/logo.svg"/>
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12 ">Create a new accounts</h2>
         <p className="text-light-3 small-medium md:baes-regular mt-2">use Apnagram enter your account details.</p>
-      </div>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-ful mt-4">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input type="text" className="shad-input" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="username"
@@ -45,17 +61,47 @@ const SignUpForm = () => {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input type="text" className="shad-input" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input type="email" className="shad-input" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input type="password" className="shad-input" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" className="shad-button_primary ">
+          {isLoading?(
+          <div className="flex-center gap-2">
+            <Loader /> Loading ...
+          </div>
+        ):"Sign Up"}
+        </Button>
       </form>
+      </div>
     </Form>
     
   )
