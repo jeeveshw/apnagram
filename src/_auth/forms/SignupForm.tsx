@@ -1,12 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-
-import { Form, FormControl,FormDescription,FormField,FormItem,FormLabel,FormMessage } from "@/components/ui/form"
+import {Link } from "react-router-dom"
+import { Form, FormControl,FormField,FormItem,FormLabel,FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form"
 import { SignupValidation } from "@/lib/validation"
 import Loader from "@/components/shared/Loader"
+
 
  
 const SignUpForm = () => {
@@ -38,7 +39,7 @@ const SignUpForm = () => {
       <div className="sm:w-420 flex-center flex-col ">
         <img src="/assets/images/logo.svg"/>
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12 ">Create a new accounts</h2>
-        <p className="text-light-3 small-medium md:baes-regular mt-2">use Apnagram enter your account details.</p>
+        <p className="text-light-3 small-medium md:baes-regular mt-2">To use Apnagram please enter your details.</p>
       
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-ful mt-4">
         <FormField
@@ -100,6 +101,8 @@ const SignUpForm = () => {
           </div>
         ):"Sign Up"}
         </Button>
+        <p className="text-small-regular text-light-2 text-center t-2"> Already have a account?
+          <Link to ="/sign-in" className="text-primary-500 text-small-semibold ml-1"> Log in</Link> </p>
       </form>
       </div>
     </Form>
