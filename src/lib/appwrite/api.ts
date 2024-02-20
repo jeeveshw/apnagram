@@ -9,12 +9,12 @@ export async function createUserAccount(user: INewUser) {
 
         const newAccount = await account.create (
                 ID.unique(),
-                user.name,
                 user.email,
-                user.password
+                user.password,
+                user.name
         )
         return newAccount;
-        
+
     } catch(error) {
         console.log(error)
         return error;
