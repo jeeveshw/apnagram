@@ -92,7 +92,7 @@ const SignUpForm = () => {
               </FormControl>
               <FormMessage />
             </FormItem>
-          )}
+          )} 
         />
         <Button type="submit" className="shad-button_primary ">
           {isLoading?(
