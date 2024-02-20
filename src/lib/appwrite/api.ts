@@ -19,5 +19,5 @@ export async function createUserAccount(user: INewUser) {
         console.log(error)
         return error;
 
-    } 
+    }
 }
