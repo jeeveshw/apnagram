@@ -12,6 +12,7 @@ export async function createUserAccount(user: INewUser) {
                 user.password,
                 user.name
         )
+        if(!newAccount) throw error;
         return newAccount;
 
     } catch(error) {
