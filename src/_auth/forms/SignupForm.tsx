@@ -11,6 +11,7 @@ import { SignupValidation } from "@/lib/validation"
 import Loader from "@/components/shared/Loader"
 import { createUserAccount } from "@/lib/appwrite/api"
 import { useCreateUserAccount } from "@/lib/react-query/queriesAndMutations"
+import { title } from "process"
 
 
  
@@ -18,6 +19,7 @@ const SignUpForm = () => {
   const { toast } = useToast()  
 
   const {mutateAsync: createUserAccount, isLoading: isCreatingUser } = useCreateUserAccount();
+  const {mutateAsync: signInAccount, isLoading: issigning } = userSignInAccount();
 
 
   // 1. Define your form.
@@ -40,7 +42,13 @@ const SignUpForm = () => {
      if(!newUser){
       return toast({ title: "Signup failed , please try again" })
      }
-     //const session = await signInAccount()
+     const session = await signInAccount({
+      email: values.email,
+      password: values.password,
+     })
+     if(!session){
+      return toast({title: 'sing in failed , please try again'})
+     }
 
   }
 
